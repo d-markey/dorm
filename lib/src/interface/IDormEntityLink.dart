@@ -46,5 +46,7 @@ abstract class IDormEntitySet<K, T extends IDormEntity<K>> extends IDormEntityLi
   void addKey(K key);  
   void removeKey(K key);  
 
+  bool containsKey(K key);
+
   void copyFrom(IDormEntitySet<K, T> other);
 }

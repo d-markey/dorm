@@ -87,6 +87,9 @@ class DormEntitySet<K, T extends IDormEntity<K>> extends IDormEntitySet<K, T> {
   void addAllKeys(Iterable<K> keys) => _refs.addAll(keys.map((k) => DormEntityRef<K, T>(_join)..key = k));
 
   @override
+  bool containsKey(K key) => _refs.any((e) => e.key == key);
+
+  @override
   void remove(T entity) {
     for (var i = 0; i < _refs.length; i++) {
       if (_refs[i].entity == entity) {
