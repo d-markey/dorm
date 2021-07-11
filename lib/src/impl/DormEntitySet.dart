@@ -15,9 +15,15 @@ class DormEntitySet<K, T extends IDormEntity<K>> extends IDormEntitySet<K, T> {
   IDormField get joinColumn => _join;
 
   @override
+  bool eager = false;
+
+  @override
   Future load(IDormDataContext dataContext, IDormTransaction transaction) async {
     final joinKey = _joinKey();
-    final repo = getRepository(dataContext);
+    var repo = getRepository(dataContext);
+    if (eager) {
+      repo = repo.eager();
+    }
     if (!_loaded && joinKey != null) {
       final entities = await repo.loadMany(transaction, _join.equals(joinKey));
       _refs.addAll(entities.map((e) => DormEntityRef<K, T>(_join)..entity = e));

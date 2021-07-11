@@ -37,6 +37,7 @@ abstract class IDormEntitySet<K, T extends IDormEntity<K>> extends IDormEntityLi
   Iterable<IDormEntityRef<K, T>> get entityRefs;
 
   int get length;
+  bool get eager;
 
   void loadWithRefs(Iterable<IDormEntity> entities);
 
